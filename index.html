@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barlang</title>
+</head>
+
+<style>
+    body{background-color: teal;}
+    .kozep {
+        display: block;
+        margin: auto;
+        width: 640px;
+    }
+    .feladat {
+        background-color: white;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 20px;
+        text-align: center;
+        min-height: 100px;
+    }
+    .red{ background-color: red; }
+    .alsok {
+        border: 1px solid grey;
+    }
+    .alsok:hover { background-color: greenyellow; }
+</style>
+
+<body onload="start()">
+
+
+    <div class="kozep">
+        <div class="feladat" id="f1">
+
+        </div>
+        <div class="feladat" id="f2">
+
+        </div>
+        <div class="feladat" id='kicsiK'>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+let elso = [];
+let masodik = [];
+    function random(){
+        let rand;
+        
+        for(let i = 0;i<6;i++){
+            rand = Math.floor(Math.random()*8+1);
+            document.getElementById("f1").innerHTML += "<img src='icon"+rand+"n.png'>"
+            elso.push("icon"+rand);
+        }
+        
+    }
+
+    function start(){
+        random();
+        for(let i = 1;i<9;i++){
+            document.getElementById('kicsiK').innerHTML += "<img class='alsok' onclick=\"no('icon"+i+"')\" src='icon"+i+"k.png'>";
+        }
+    }
+    console.log(elso)
+    let szamol = 0;
+    let joe = 0;
+    function no(kep){
+        if(joe == 1){
+            torol();
+            joe = 0;
+        }
+        else {
+            if(szamol<6){
+                szamol++;
+                
+                if(elso.includes(kep)) {
+                    document.getElementById("f2").innerHTML +=  "<img src='"+kep+"n.png'>";
+                    joe = 0;
+                    masodik.push(kep+"n");
+                }
+                else {
+                    document.getElementById("f2").innerHTML +=  "<img class='red' onclick='torol()' src='"+kep+"n.png'>";
+                    joe = 1;
+                }
+            }
+        }
+        console.log(masodik)
+        
+    }
+    function torol(){
+        szamol = 0;
+        document.getElementById("f1").innerHTML = "";
+        random();
+        document.getElementById("f2").innerHTML = "";
+    }
+</script>
